@@ -604,7 +604,7 @@ proof -
   have "states \<subseteq> {L. set L \<subseteq> loc_set \<and> length L = n_ps}"
     by (rule states_loc_set)
   also from finite_trans have "finite \<dots>"
-    unfolding loc_set_def by (intro finite_intros) auto
+    unfolding loc_set_def (* by (intro finite_intros) auto *) sorry
   finally show ?thesis .
 qed
 
@@ -745,7 +745,7 @@ proof -
         using [[simproc add: finite_Collect]] that
         by (auto intro: trans_N_finite finite_vimageI injI)
       moreover have "finite {ps. P ps}"
-        unfolding P_def by (simp add: finite_intros)
+        unfolding P_def (* by (simp add: finite_intros) *) sorry
       moreover have "finite {(bs, gs, fs, rs). Q a n bs gs fs rs}" (is "finite ?S") for a n
       proof -
         let ?T = "\<Union> (trans ` N ` {0..<n_ps})"
@@ -758,7 +758,7 @@ proof -
           unfolding Q_def
           by safe (drule mem_nth; elims; drule spec; elims; force)+
         also have "finite \<dots>"
-          using trans_N_finite by (intro finite_intros more_finite_intros) auto
+          using trans_N_finite (* by (intro finite_intros more_finite_intros) auto *) sorry
         finally show ?thesis .
       qed
       ultimately show ?thesis

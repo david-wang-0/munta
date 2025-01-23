@@ -1,4 +1,5 @@
-session "TA_Library" in "library" = "Refine_Imperative_HOL" +
+session "TA_Library" in "library" = 
+  "Refine_Imperative_HOL" +
   sessions
     Transition_Systems_and_Automata
     LTL_Master_Theorem

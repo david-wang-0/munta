@@ -4,7 +4,7 @@ theory DBM_Normalization
   imports DBM_Basics DBM_Misc "HOL-Eisbach.Eisbach"
 begin
 
-text \<open>NB: The journal paper on extrapolations based on lower and upper bounds
+(* text \<open>NB: The journal paper on extrapolations based on lower and upper bounds
 @{cite "BehrmannBLP06"} provides slightly incorrect definitions that would always set
 (lower) bounds of the form \<open>M 0 i\<close> to \<open>\<infinity>\<close>.
 To fix this, we use two invariants that can also be found in TChecker's DBM library, for instance:
@@ -12,7 +12,7 @@ To fix this, we use two invariants that can also be found in TChecker's DBM libr
    (see \<open>extra_lup_lower_bounds\<close>).
   \<^enum> Entries to the diagonal is always normalized to \<open>Le 0\<close>, \<open>Lt 0\<close> or \<open>\<infinity>\<close>. This makes it again
     obvious that the set of normalized DBMs is finite.
-\<close>
+\<close> *)
 
 (* XXX move *)
 lemmas dbm_less_simps[simp] = dbm_lt_code_simps[folded DBM.less]

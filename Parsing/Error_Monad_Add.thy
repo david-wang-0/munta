@@ -4,7 +4,7 @@ section \<open>More Material on the Error Monad\<close>
 theory Error_Monad_Add
 imports
   Certification_Monads.Check_Monad
-  Show.Show_Instances
+  Show.Show_Instances 
 begin
 (* TODO: Move *)
 abbreviation "assert_opt \<Phi> \<equiv> if \<Phi> then Some () else None"

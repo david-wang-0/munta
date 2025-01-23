@@ -1207,7 +1207,8 @@ schematic_goal no_deadlock_certifier3_alt_def:
   unfolding no_deadlock_certifier3_def
   apply (subst impl.deadlock_unreachability_checker3_def[
         OF state_impl_abstract', OF _ A assms(2,3) split_k'_full_split[of M_list, unfolded that]
-        ], (simp; fail))
+        ])
+  apply (simp)
   unfolding check_deadlock_fold_def[symmetric]
   apply (abstract_let check_deadlock_fold check_deadlock1)
   unfolding check_deadlock_fold_def

@@ -1254,6 +1254,8 @@ sublocale pure:
         Heap_Monad.fold_map (\<lambda>(l, s). do {s \<leftarrow> from_state s; return (from_loc l, s)}) xs})"
   ..
 
+term "initsi"
+
 end
 
 end

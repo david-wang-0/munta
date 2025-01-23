@@ -26,6 +26,9 @@ method_setup inst_existentials =
 text \<open>Test\<close>
 lemma
   "\<exists> x. \<exists> y \<in> UNIV. (\<exists> z \<in> UNIV. x + y = (z::nat)) \<and> (\<exists> z. x + y = (z::nat))"
+  (* apply (rule exI[where x = "1::nat"])
+  apply (inst_existentials "2::nat")
+  apply (inst_existentials "3::nat") *)
   by (inst_existentials "1 :: nat" "2 :: nat" "3 :: nat"; simp)
 
 end

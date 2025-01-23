@@ -1210,4 +1210,7 @@ export_code
   precond_mc Pure.type init_pred_check time_indep_check1 time_indep_check1 conjunction_check2
   checking SML
 
+value "reachability_checker'"
+
+
 end (* Theory *)
