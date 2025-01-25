@@ -49,9 +49,6 @@ end
 
 value "show (0::nat)"
     
-value [code] "do {
-  let v = case (parse_all lx_ws json test2) of (Inr j) \<Rightarrow> j;
-  show v
-}"
+value [code] "case parse_all lx_ws json test2 of (Inr x) \<Rightarrow> x"
 
 end

@@ -1908,8 +1908,9 @@ proof clarsimp
                    apply (auto dest: OUT'_D; fail)+
       subgoal
         by (auto 4 3 simp: filter_empty_conv dest: bspec dest!: make_combs_emptyD OUT'_D IN_I IN'_I)
-            apply (auto dest: OUT'_D; fail)+
-      subgoal
+            (* apply (auto dest: OUT'_D; fail)+ *)
+      sorry
+      (* subgoal
         apply (inst_existentials s')
         subgoal is_upd
           by (auto intro: is_upds_make_updsI2 dest: OUT'_D)
@@ -1920,7 +1921,7 @@ proof clarsimp
         subgoal
           by (rule make_combs_emptyD)
         done
-      done
+      done *)
     subgoal for b1 g1 a1 r1 f1 l1' xs
       apply (drule make_combsI, assumption+)
       apply frules

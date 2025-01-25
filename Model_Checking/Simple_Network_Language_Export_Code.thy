@@ -1218,7 +1218,7 @@ end
 end
 
 abbreviation "scan_bexp \<equiv> scan_7' scan_bexp_elem sexp.imply sexp.or sexp.and sexp.not"
-
+                            
 lemma [parser_rules]:
   "is_cparser scan_bexp"
   by (subst scan_7'.simps[abs_def]) simp
