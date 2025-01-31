@@ -104,3 +104,10 @@ and you will get the following:
 - `output/abstract_reachability.pdf`: the abstract formalization of reachability checking for Timed Automata
 - `output/model_checking.pdf`: the formalization of MUNTA and the route from the abstract formalization to the correctness proof for MUNTA
 - `output/abstract_reachability_proofs.pdf`, `output/model_checking_proofs.pdf`: variants of the above documents with proofs
+
+# Certificate checking
+```
+cd munta/ML
+make muntac_mlton
+./muntac_mlton -m <model>.muntax -r <renaming>.rnm -c <certificate>.cert
+```

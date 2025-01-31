@@ -42,7 +42,7 @@ fun lift_parser p = fn (ctxt, x) => p x |> (fn (r, s) => (r, (ctxt, s)))
 \<close>
 
 method_setup abstract_let =
-  \<open>Args.term -- Scan.option (lift_parser Args.text) >> (
+  \<open>Args.term -- Scan.option (lift_parser ((Parse.token Parse.embedded) >> Token.content_of)) >> (
     fn (t, n_opt) => fn ctxt => SIMPLE_METHOD (pull_tac ctxt t (Option.getOpt (n_opt, "_"))))
   \<close>
   "Abstract over a subterm and extract it into a Let-binding"

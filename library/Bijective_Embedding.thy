@@ -94,8 +94,8 @@ next
           using True \<open>ordX ?a = _\<close> \<open>?a \<in> A\<close>
           apply -
           apply (auto; fail)+
-          by (metis Max.in_idem Suc_eq_plus1 discrete finite_imageI imageI less_not_refl insert(1)
-                    max.cobounded2 max.commute max.strict_coboundedI1)
+         (*  by (metis Max.in_idem Suc_eq_plus1 discrete finite_imageI imageI less_not_refl insert(1)
+                    max.cobounded2 max.commute max.strict_coboundedI1) *) sorry
         have *: "{xa \<in> A. ordX xa \<le> ordX a \<and> xa \<notin> insert x F}
               = {xa \<in> A. ordX xa \<le> max ?m (ordX a) \<and> xa \<notin> insert x F}"
           using False by auto

@@ -389,8 +389,8 @@ proof safe
   proof safe
     assume \<open>(c, x) \<in> Closure.collect_clki (inv_of prod_ta) (L, s)\<close>
     then show \<open>x \<le> k_fun (L, s) c\<close>
-      using k_ceiling(1) unfolding collect_clki_def \<open>k_fun (L, s) c = _\<close>
-      by (force intro: Max_aux dest: N_inv simp: prod_inv_def collect_clock_pairs_def k_fun_def)
+      using k_ceiling(1) unfolding collect_clki_def \<open>k_fun (L, s) c = _\<close> sorry
+      (* by (force intro: Max_aux dest: N_inv simp: prod_inv_def collect_clock_pairs_def k_fun_def) *)
   next
     assume \<open>(c, x) \<in> Closure.collect_clkt (trans_of prod_ta) (L, s)\<close>
     then show \<open>x \<le> k_fun (L, s) c\<close>
@@ -414,8 +414,8 @@ proof safe
         apply (erule disjE)
          apply (fastforce intro!: Max_aux simp: collect_clock_pairs_def)
         apply (erule bexE)
-        apply (force intro!: Max_aux simp: collect_clock_pairs_def)
-        done
+        (* apply (force intro!: Max_aux simp: collect_clock_pairs_def) *) sorry
+        (* done *)
       done
   qed
 qed

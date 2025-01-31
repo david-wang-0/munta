@@ -16,9 +16,9 @@ respectively, while \<open>P3\<close> and \<open>P4\<close> \<^emph>\<open>will\
 The order of processes in the synchronization specifies the order of updates.
 Therefore we end up with the following type definition:\<close>
 
-type_synonym identifier = String.literal
+type_synonym "identifier" = String.literal
 
-type_synonym lvalue = identifier
+type_synonym lvalue = "identifier"
 
 record element =
   automaton :: String.literal

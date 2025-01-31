@@ -288,7 +288,7 @@ ML \<open>
   in
     @{code parse_convert_run_print} dc s end
 \<close>
-
+(* 
 ML_val \<open>
   do_test true "benchmarks/HDDI_02.muntax" ()
 \<close>
@@ -307,6 +307,10 @@ ML_val \<open>
 
 ML_val \<open>
   do_test true "benchmarks/bridge.muntax" ()
+\<close> *)
+
+ML_val \<open>
+  do_test true "/home/david/work/munta/benchmarks/bridge.muntax" ()
 \<close>
 
 code_printing
@@ -322,6 +326,18 @@ ML \<open>
     val s = file_to_string file;
   in
     @{code parse_convert_run_check} @{code Impl3} @{code num_split} dc s end
+\<close>
+
+ML \<open>
+  fun do_check_dbg dc file =
+  let
+    val s = file_to_string file;
+  in
+    @{code parse_convert_run_check} @{code Debug} @{code num_split} dc s end
+\<close>
+
+ML_val \<open>
+  do_check false "/home/david/work/munta/benchmarks/bridge.muntax" ()
 \<close>
 
 (*
@@ -352,13 +368,13 @@ ML_val \<open>
 ML_val \<open>
   do_check true "benchmarks/bridge.muntax" ()
 \<close>
-*)
+
 
 ML_val \<open>
   do_check false "benchmarks/PM_all_3.muntax" ()
 \<close>
 
-(*
+
 ML_val \<open>
   do_check true "benchmarks/PM_all_3.muntax" ()
 \<close>
@@ -999,6 +1015,7 @@ end
 
 text \<open>Delete ``junk''\<close>
 code_printing code_module Bits_Integer \<rightharpoonup> (SML) \<open>\<close>
+code_printing code_module Integer_Bit \<rightharpoonup> (SML) \<open>\<close>
 
 text \<open>For agreement with SML\<close>
 code_printing

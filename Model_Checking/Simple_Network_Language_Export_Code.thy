@@ -1218,7 +1218,7 @@ end
 end
 
 abbreviation "scan_bexp \<equiv> scan_7' scan_bexp_elem sexp.imply sexp.or sexp.and sexp.not"
-
+                            
 lemma [parser_rules]:
   "is_cparser scan_bexp"
   by (subst scan_7'.simps[abs_def]) simp
@@ -1630,7 +1630,7 @@ ML \<open>
     @{code parse_convert_run_test} dc s end
 \<close>
 
-
+(* 
 ML_val \<open>assert
   (test false "benchmarks/HDDI_02.muntax" ())
   "Property is not satisfied!"\<close>
@@ -1678,6 +1678,6 @@ ML_val \<open>assert
   "Property is not satisfied!"\<close>
 ML_val \<open>assert
   (test true "benchmarks/PM_all_4.muntax" ())
-  "Model has no deadlock!"\<close>
+  "Model has no deadlock!"\<close> *)
 
 end

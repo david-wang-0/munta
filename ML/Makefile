@@ -32,9 +32,18 @@ muntax: muntax.mlb Muntax.sml Simple_Model_Checker.sml
 
 convert_int: Certificate.ML
 	sed -i -e 's/IntInf/Int/g' Certificate.ML
+#	perl -0777 -pi -e 's/structure Integer_Bit(?:\S|\s)+?\(\*struct Integer_Bit\*\)\n//' Certificate.ML
+
+# An Integer_Bit type is defined, which uses IntInf (unbounded integers; possibly part of default implementation of Isabelle int?) from the SML basis library. 
+# This implements operators such as xorb.
+# However, native machine integers for all purposes provide better performance (source: paper?), but they do not implement xorb.
+# convert_int does the conversion. Since everything seems to work without Integer_Bit, I chose to manually remove it, for now... 
+# See ‹Delete ``junk''› in /Certificate_Checking/Simple_Network_Language_Certificate_Code.thy
 
 muntac_poly: convert_int
 	polyc -o muntac_poly build_muntac.sml
+
+MLUNTA_CERT="../mlunta_certificate"
 
 muntac_mlton: convert_int
 	mlton -default-type int64 -mlb-path-var "MLUNTA_CERT $(MLUNTA_CERT)" -output muntac_mlton muntac.mlb

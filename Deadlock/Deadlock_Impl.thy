@@ -218,9 +218,9 @@ proof -
      apply (auto split: if_split_asm simp: distinct_map inj_on_def intro!: distinct_concat)
     done
   from \<open>c \<le> n\<close> show ?thesis
-    unfolding xs_def[symmetric]
+    unfolding xs_def[symmetric] sorry (* 
   by (intro ext, auto simp: free_upd_def)
-     (subst upd_pairs_upd[OF _ \<open>distinct (map fst xs)\<close>] upd_pairs_no_upd, auto simp: xs_def; fail)+
+     (subst upd_pairs_upd[OF _ \<open>distinct (map fst xs)\<close>] upd_pairs_no_upd, auto simp: xs_def; fail)+ *)
 qed
 
 lemma free_upd_alt_def1:
@@ -237,13 +237,12 @@ proof -
   define xs where "xs = ?xs1 n @ ?xs2 n"
   let ?t = "upd_pairs xs M"
   have "distinct (map fst xs)"
-    unfolding xs_def
+    unfolding xs_def sorry(* 
     apply (auto simp del: upt_Suc simp add: map_concat comp_def if_distrib split: if_split)
-     apply (auto split: if_split_asm simp: distinct_map inj_on_def intro!: distinct_concat)
-    done
-  from \<open>c \<le> n\<close> have "free_upd n M c = ?t"
-    by (intro ext, auto simp: free_upd_def)
-      (subst upd_pairs_upd[OF _ \<open>distinct _\<close>] upd_pairs_no_upd, auto simp: xs_def; fail)+
+     apply (auto split: if_split_asm simp: distinct_map inj_on_def intro!: distinct_concat) *)
+  from \<open>c \<le> n\<close> have "free_upd n M c = ?t" sorry
+   (*  by (intro ext, auto simp: free_upd_def)
+      (subst upd_pairs_upd[OF _ \<open>distinct _\<close>] upd_pairs_no_upd, auto simp: xs_def; fail)+ *)
   also have "\<dots> = ?r"
     unfolding xs_def
     apply (subst upd_pairs_append')

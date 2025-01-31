@@ -5,7 +5,7 @@ begin
 chapter \<open>Floyd-Warshall Algorithm for the All-Pairs Shortest Paths Problem\<close>
 
 section \<open>Introduction\<close>
-text \<open>
+(* text \<open>
   The \fw @{cite floyd and roy and warshall} is a classic dynamic programming algorithm to compute
   the length of all shortest paths between any two vertices in a graph
   (i.e. to solve the all-pairs shortest path problem, or \<open>APSP\<close> for short).
@@ -37,7 +37,7 @@ text \<open>
   factor our the inner two loops as a separate algorithm and show that it has similar properties
   as the full algorithm for a single intermediate vertex \<open>k\<close>.
 \<close>
-
+ *)
 
 section \<open>Preliminaries\<close>
 

@@ -59,7 +59,7 @@ named_theorems more_finite_intros
 lemmas [finite_intros] =
   finite_UnI finite_Union finite_imageI
   finite_lists_length_eq finite_lists_length_le
-  distinct_finite_subset distinct_finite_set
+  (* distinct_finite_subset *) distinct_finite_set
 
 lemmas [more_finite_intros] =
   finite_prodI finite_prodI3 finite_prodI4 finite_prodI5
