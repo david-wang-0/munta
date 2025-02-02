@@ -308,11 +308,11 @@ ML_val \<open>
 ML_val \<open>
   do_test true "benchmarks/bridge.muntax" ()
 \<close> *)
-
+(* 
 ML_val \<open>
-  do_test true "/home/david/work/munta/benchmarks/bridge.muntax" ()
+  do_test true "benchmarks/bridge.muntax" ()
 \<close>
-
+ *)
 code_printing
   constant "parallel_fold_map" \<rightharpoonup>
       (SML)   "(fn f => fn xs => fn () => Par'_List.map (fn x => f x ()) xs) _ _"

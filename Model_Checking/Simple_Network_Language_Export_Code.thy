@@ -1321,7 +1321,7 @@ abbreviation additive_op where "additive_op \<equiv>
 *)
 
 definition [consuming]:
-  "scan_update \<equiv>
+  "scan_update \<equiv>                                      
    scan_var --- (exactly ''='' \<parallel> exactly '':='') **-- scan_exp
    with (\<lambda>(s, x). (String.implode s, x))"
 
@@ -1350,6 +1350,7 @@ definition compile_invariant where
         Result (g, b)
       }" for inv
 
+(* Invariants are formulas on states? *)
 definition compile_invariant' where
   "compile_invariant' clocks vars inv \<equiv>
   if inv = STR '''' then
@@ -1360,6 +1361,7 @@ definition compile_invariant' where
   }
 " for inv
 
+(* It seems that state invariants must be empty. This returns a pair of an integer ID and a name. *)
 definition convert_node where
   "convert_node clocks vars n \<equiv> do {
     n \<leftarrow>  of_object n;
@@ -1373,6 +1375,10 @@ definition convert_node where
     Result ((name, ID), inv)
   }"
 
+
+(* Labels are ! for Out and ? for In. ((Out a, b)) sends the value of variable b through channel a.
+  ((In a, c)) takes the value in channel a and reads it into the variable c. These transitions can
+  only occur in pairs and synchronise a and b (Syn a b). *)
 definition convert_edge where
   "convert_edge clocks vars e \<equiv> do {
     e \<leftarrow> of_object e;
@@ -1398,6 +1404,7 @@ definition convert_edge where
     Result (source, check, g, label, upds, resets, target)
   }"
 
+(*  *)
 definition convert_automaton where
   "convert_automaton clocks vars a \<equiv> do {
     nodes \<leftarrow> get a ''nodes'' \<bind> of_array;
@@ -1417,6 +1424,7 @@ definition convert_automaton where
     edges \<leftarrow> combine_map (convert_edge clocks vars) edges;
     Result (names_to_ids, ids_to_names, (committed, urgent, edges, invs))
   }"
+
 
 fun rename_locs_sexp where
   "rename_locs_sexp f (not a) =

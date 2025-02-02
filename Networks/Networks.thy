@@ -41,6 +41,12 @@ where
       L' = L[p := l1', q := l2']; u' = [(r1 @ r2)\<rightarrow>0]u
      \<rbrakk> \<Longrightarrow> N \<turnstile>\<^sub>N \<langle>L, u\<rangle> \<rightarrow>\<^bsub>Syn b1 b2\<^esub> \<langle>L', u'\<rangle>"
 
+(* 
+ In and Out transitions occur at the same time.
+  In and Out take channes. The symbols of the timed automaton are pairs consisting of (In a) or
+  (Out a) where a is a channel, and b, where b is a variable to be sent/received through the channel.
+*)
+
 inductive_cases[elim!]: "N \<turnstile>\<^sub>N \<langle>L, u\<rangle> \<rightarrow>\<^bsub>a\<^esub> \<langle>L', u'\<rangle>"
 
 inductive steps_n ::
