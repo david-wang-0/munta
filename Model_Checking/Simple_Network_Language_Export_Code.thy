@@ -1218,7 +1218,7 @@ end
 end
 
 abbreviation "scan_bexp \<equiv> scan_7' scan_bexp_elem sexp.imply sexp.or sexp.and sexp.not"
-                            
+
 lemma [parser_rules]:
   "is_cparser scan_bexp"
   by (subst scan_7'.simps[abs_def]) simp
@@ -1376,9 +1376,8 @@ definition convert_node where
   }"
 
 
-(* Labels are ! for Out and ? for In. ((Out a, b)) sends the value of variable b through channel a.
-  ((In a, c)) takes the value in channel a and reads it into the variable c. These transitions can
-  only occur in pairs and synchronise a and b (Syn a b). *)
+(* Labels are ! for Out and ? for In. They are always used in pairs of (In a, b) (Out a, c).
+  Silent transitions are (Sil ""). TODO: What are b and c? *)
 definition convert_edge where
   "convert_edge clocks vars e \<equiv> do {
     e \<leftarrow> of_object e;

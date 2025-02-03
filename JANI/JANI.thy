@@ -55,7 +55,7 @@ type_synonym expression = "(identifier, int) exp"
 type_synonym condition  = "(identifier, int) bexp"
 
 record variable_declaration =
-  name :: identifier
+  name :: "identifier"
   type :: type
   transient :: "bool" \<comment> \<open>Kill option for convenience\<close>
   initial_value :: "expression option"
@@ -63,7 +63,7 @@ record variable_declaration =
 \<^cancel>\<open>type_synonym constant_declaration = \<dots>\<close>
 
 record action =
-  name :: identifier
+  name :: "identifier"
   comment :: "String.literal option"
 
 record transient_value =
@@ -73,7 +73,7 @@ record transient_value =
   comment :: "String.literal option" \<comment> \<open>an optional comment\<close>
 
 record location =
-  name :: identifier \<comment> \<open>the name of the location, unique among all locations of this automaton\<close>
+  name :: "identifier" \<comment> \<open>the name of the location, unique among all locations of this automaton\<close>
   time_progress :: \<comment> \<open>the location's time progress condition, not allowed except TA, PTA, STA, HA, PHA and STA,\<close>
                         \<comment> \<open>type bool; if omitted in TA, PTA, STA, HA, PHA or SHA, it is true\<close>
     "condition option"
@@ -87,13 +87,13 @@ record assignment =
   "comment" :: "String.literal option"
 
 record destination =
-  location :: identifier
+  location :: "identifier"
   probability :: "unit option"
   assignments :: "assignment list" \<comment> \<open>Kill option for convenience\<close>
   "comment" :: "String.literal option"
 
 record edge =
-  location :: identifier
+  location :: "identifier"
   action :: "identifier option"
   rate :: "unit option"
   guard :: "condition" \<comment> \<open>Kill option for convenience\<close>
@@ -101,7 +101,7 @@ record edge =
   "comment" :: "String.literal option"
 
 record automaton =
-  name :: identifier
+  name :: "identifier"
   variables :: "variable_declaration list" \<comment> \<open>Kill option for convenience\<close>
   restrict_initial :: "unit option"
   locations :: "location list"

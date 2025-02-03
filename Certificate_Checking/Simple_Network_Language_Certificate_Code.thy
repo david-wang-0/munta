@@ -336,9 +336,9 @@ ML \<open>
     @{code parse_convert_run_check} @{code Debug} @{code num_split} dc s end
 \<close>
 
-ML_val \<open>
-  do_check false "/home/david/work/munta/benchmarks/bridge.muntax" ()
-\<close>
+(* ML_val \<open>
+  do_check false "benchmarks/bridge.muntax" ()
+\<close> *)
 
 (*
 ML_val \<open>
