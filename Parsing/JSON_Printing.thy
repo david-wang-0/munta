@@ -32,8 +32,8 @@ fun showsp_JSON
 "showsp_list_JSON (x#[]) = showsp_JSON x" |
 "showsp_list_JSON (x#xs) = (showsp_JSON x) o (shows '', '') o (showsp_list_JSON xs)" |
 "showsp_kv_list_JSON [] = id" |
-"showsp_kv_list_JSON ((k, v)#[]) = (shows k) o (shows '': '') o (showsp_JSON v)" |
-"showsp_kv_list_JSON ((k, v)#kvs) = (shows k) o (shows '': '') o (showsp_JSON v) o (shows '', '') o (showsp_kv_list_JSON kvs)"
+"showsp_kv_list_JSON ((k, v)#[]) = (shows ''\"'') o (shows k) o (shows ''\": '') o (showsp_JSON v)" |
+"showsp_kv_list_JSON ((k, v)#kvs) = (shows ''\"'') o (shows k) o (shows ''\": '') o (showsp_JSON v) o (shows '', '') o (showsp_kv_list_JSON kvs)"
 
 instantiation JSON :: "show" 
 begin
