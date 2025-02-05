@@ -1,0 +1,71 @@
+{
+  "automata":
+    [
+      {
+        "name":
+          "main",
+        "initial":
+          2,
+        "edges":
+          [
+            {
+              "source":
+                2,
+              "label":
+                "",
+              "target":
+                1,
+              "guard":
+                "",
+              "update":
+                "lock := 1, pf11 := 1, ef12 := 1, s1 := 1"
+            },
+            {
+              "source":
+                1,
+              "label":
+                "",
+              "target":
+                0,
+              "guard":
+                "(lock = 1)",
+              "update":
+                "lock := 0, pf11 := 1, ef12 := 1, s1 := 1"
+            }
+          ],
+        "nodes":
+          [
+            {
+              "id":
+                0,
+              "name":
+                "goal",
+              "invariant":
+                ""
+            },
+            {
+              "id":
+                1,
+              "name":
+                "plan",
+              "invariant":
+                ""
+            },
+            {
+              "id":
+                2,
+              "name":
+                "start",
+              "invariant":
+                ""
+            }
+          ]
+      }
+    ],
+  "formula":
+    "E<> main.goal",
+  "vars":
+    "pf11[0:1], ef11[0:1], s1[0:1], lock[0:1]",
+  "clocks":
+    ""
+}
