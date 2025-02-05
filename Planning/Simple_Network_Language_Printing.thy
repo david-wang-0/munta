@@ -147,8 +147,6 @@ instance
   done
 end
 
-(* To do: properly implement shows_*) 
-
 instantiation bexp:: ("show", "show") "show" begin
   definition "shows_prec_bexp (n::nat) e s \<equiv> showsp_bexp e @ s"
   definition "shows_list_bexp xs s \<equiv> 
@@ -435,10 +433,10 @@ ML \<open>
 
 ML_val \<open>OS.FileSys.getDir()\<close>
 
-ML_val \<open>
-  do_parse_convert "work/temporal_planning_certification/munta/certificates/planning.muntax"
+(* ML_val \<open>
+  do_parse_convert "certificates/planning.muntax"
 \<close>
-
+ *)
 definition goal_automaton where
 "goal_automaton \<equiv> (
   STR ''main'', 
@@ -511,9 +509,9 @@ definition "test_net \<equiv> net_to_string network"
 
 ML_val \<open>OS.FileSys.getDir()\<close>
 
-ML_val \<open>
-string_to_file @{code "test_net"} "work/temporal_planning_certification/munta/test_output/net.json"
-\<close>
+(* ML_val \<open>
+string_to_file @{code "test_net"} "test_output/net.json"
+\<close> *)
 
 
 
