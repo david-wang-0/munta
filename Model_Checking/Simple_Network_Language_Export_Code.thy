@@ -80,11 +80,23 @@ locale Simple_Network_Rename_Formula_String =
 begin
 
 interpretation Simple_Network_Rename_Formula
-  by (standard;
-      rule renum_states_inj renum_clocks_inj renum_vars_inj bounds'_var_set renum_acts_inj
-        loc_set_invs loc_set_broadcast loc_set_urgent urge_not_in_clk_set
-        infinite_literal infinite_UNIV_nat L\<^sub>0_states s\<^sub>0_dom s\<^sub>0_distinct formula_dom
-     )+
+  apply standard
+                  apply (rule renum_states_inj)
+                 apply (rule renum_clocks_inj)
+                apply (rule renum_vars_inj)
+               apply (rule renum_acts_inj)
+              apply (rule infinite_literal)
+             apply (rule infinite_UNIV_nat)
+            apply (rule bounds'_var_set)
+           apply (rule loc_set_invs)
+          apply (rule loc_set_broadcast)
+         apply (rule loc_set_urgent)
+        apply (rule urge_not_in_clk_set)
+       apply (rule L\<^sub>0_states)
+      apply (rule s\<^sub>0_dom)
+     apply (rule s\<^sub>0_distinct)
+    apply (rule formula_dom)+
+  done
 
 lemmas Simple_Network_Rename_intro = Simple_Network_Rename_Formula_axioms
 

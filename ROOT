@@ -134,3 +134,4 @@ session TA_Certificates in Certificate_Checking = TA_Code +
 
 session TA_Planning in Planning = TA_Certificates +
   theories Simple_Network_Language_Printing 
+           Simple_Network_Language_Printable

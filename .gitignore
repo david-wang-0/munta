@@ -1,3 +1,5 @@
+.vscode/
+
 # ML output #
 #############
 ML/*.cmi
@@ -12,6 +14,7 @@ ML/*_int.*
 ##############################
 certificates/*.cert
 certificates/*.rnm
+cer
 
 # Isabelle document output #
 ############################

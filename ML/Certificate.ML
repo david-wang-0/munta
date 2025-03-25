@@ -1,29 +1,29 @@
 
 structure Uint : sig
-  val set_bit : Word.word -> IntInf.int -> bool -> Word.word
-  val shiftl : Word.word -> IntInf.int -> Word.word
-  val shiftr : Word.word -> IntInf.int -> Word.word
-  val shiftr_signed : Word.word -> IntInf.int -> Word.word
-  val test_bit : Word.word -> IntInf.int -> bool
+  val set_bit : Word.word -> Int.int -> bool -> Word.word
+  val shiftl : Word.word -> Int.int -> Word.word
+  val shiftr : Word.word -> Int.int -> Word.word
+  val shiftr_signed : Word.word -> Int.int -> Word.word
+  val test_bit : Word.word -> Int.int -> bool
 end = struct
 
 fun set_bit x n b =
-  let val mask = Word.<< (0wx1, Word.fromLargeInt (IntInf.toLarge n))
+  let val mask = Word.<< (0wx1, Word.fromLargeInt (Int.toLarge n))
   in if b then Word.orb (x, mask)
      else Word.andb (x, Word.notb mask)
   end
 
 fun shiftl x n =
-  Word.<< (x, Word.fromLargeInt (IntInf.toLarge n))
+  Word.<< (x, Word.fromLargeInt (Int.toLarge n))
 
 fun shiftr x n =
-  Word.>> (x, Word.fromLargeInt (IntInf.toLarge n))
+  Word.>> (x, Word.fromLargeInt (Int.toLarge n))
 
 fun shiftr_signed x n =
-  Word.~>> (x, Word.fromLargeInt (IntInf.toLarge n))
+  Word.~>> (x, Word.fromLargeInt (Int.toLarge n))
 
 fun test_bit x n =
-  Word.andb (x, Word.<< (0wx1, Word.fromLargeInt (IntInf.toLarge n))) <> Word.fromInt 0
+  Word.andb (x, Word.<< (0wx1, Word.fromLargeInt (Int.toLarge n))) <> Word.fromInt 0
 
 end; (* struct Uint *)
 
@@ -63,30 +63,30 @@ end
 val _ = if 5 <= Word.wordSize then () else raise (Fail ("wordSize less than 5"));
 
 structure Uint32 : sig
-  val set_bit : Word32.word -> IntInf.int -> bool -> Word32.word
-  val shiftl : Word32.word -> IntInf.int -> Word32.word
-  val shiftr : Word32.word -> IntInf.int -> Word32.word
-  val shiftr_signed : Word32.word -> IntInf.int -> Word32.word
-  val test_bit : Word32.word -> IntInf.int -> bool
+  val set_bit : Word32.word -> Int.int -> bool -> Word32.word
+  val shiftl : Word32.word -> Int.int -> Word32.word
+  val shiftr : Word32.word -> Int.int -> Word32.word
+  val shiftr_signed : Word32.word -> Int.int -> Word32.word
+  val test_bit : Word32.word -> Int.int -> bool
 end = struct
 
 fun set_bit x n b =
-  let val mask = Word32.<< (0wx1, Word.fromLargeInt (IntInf.toLarge n))
+  let val mask = Word32.<< (0wx1, Word.fromLargeInt (Int.toLarge n))
   in if b then Word32.orb (x, mask)
      else Word32.andb (x, Word32.notb mask)
   end
 
 fun shiftl x n =
-  Word32.<< (x, Word.fromLargeInt (IntInf.toLarge n))
+  Word32.<< (x, Word.fromLargeInt (Int.toLarge n))
 
 fun shiftr x n =
-  Word32.>> (x, Word.fromLargeInt (IntInf.toLarge n))
+  Word32.>> (x, Word.fromLargeInt (Int.toLarge n))
 
 fun shiftr_signed x n =
-  Word32.~>> (x, Word.fromLargeInt (IntInf.toLarge n))
+  Word32.~>> (x, Word.fromLargeInt (Int.toLarge n))
 
 fun test_bit x n =
-  Word32.andb (x, Word32.<< (0wx1, Word.fromLargeInt (IntInf.toLarge n))) <> Word32.fromInt 0
+  Word32.andb (x, Word32.<< (0wx1, Word.fromLargeInt (Int.toLarge n))) <> Word32.fromInt 0
 
 end; (* struct Uint32 *)
 
@@ -152,19 +152,19 @@ fun shrink (aref, sz) = case aref of
 structure IsabelleMapping = struct
 type 'a ArrayType = 'a array;
 
-fun new_array (a:'a) (n:IntInf.int) = array (IntInf.toInt n, a);
+fun new_array (a:'a) (n:Int.int) = array (Int.toInt n, a);
 
-fun array_length (a:'a ArrayType) = IntInf.fromInt (length a);
+fun array_length (a:'a ArrayType) = Int.fromInt (length a);
 
-fun array_get (a:'a ArrayType) (i:IntInf.int) = sub (a, IntInf.toInt i);
+fun array_get (a:'a ArrayType) (i:Int.int) = sub (a, Int.toInt i);
 
-fun array_set (a:'a ArrayType) (i:IntInf.int) (e:'a) = update (a, IntInf.toInt i, e);
+fun array_set (a:'a ArrayType) (i:Int.int) (e:'a) = update (a, Int.toInt i, e);
 
 fun array_of_list (xs:'a list) = fromList xs;
 
-fun array_grow (a:'a ArrayType) (i:IntInf.int) (x:'a) = grow (a, IntInf.toInt i, x);
+fun array_grow (a:'a ArrayType) (i:Int.int) (x:'a) = grow (a, Int.toInt i, x);
 
-fun array_shrink (a:'a ArrayType) (sz:IntInf.int) = shrink (a,IntInf.toInt sz);
+fun array_shrink (a:'a ArrayType) (sz:Int.int) = shrink (a,Int.toInt sz);
 
 end;
 
@@ -255,25 +255,25 @@ structure FArray = struct
 structure IsabelleMapping = struct
 type 'a ArrayType = 'a array;
 
-fun new_array (a:'a) (n:IntInf.int) = array (IntInf.toInt n, a);
+fun new_array (a:'a) (n:Int.int) = array (Int.toInt n, a);
 
-fun array_length (a:'a ArrayType) = IntInf.fromInt (length a);
+fun array_length (a:'a ArrayType) = Int.fromInt (length a);
 
-fun array_get (a:'a ArrayType) (i:IntInf.int) = sub (a, IntInf.toInt i);
+fun array_get (a:'a ArrayType) (i:Int.int) = sub (a, Int.toInt i);
 
-fun array_set (a:'a ArrayType) (i:IntInf.int) (e:'a) = update (a, IntInf.toInt i, e);
+fun array_set (a:'a ArrayType) (i:Int.int) (e:'a) = update (a, Int.toInt i, e);
 
 fun array_of_list (xs:'a list) = fromList xs;
 
-fun array_grow (a:'a ArrayType) (i:IntInf.int) (x:'a) = grow (a, IntInf.toInt i, x);
+fun array_grow (a:'a ArrayType) (i:Int.int) (x:'a) = grow (a, Int.toInt i, x);
 
-fun array_shrink (a:'a ArrayType) (sz:IntInf.int) = shrink (a,IntInf.toInt sz);
+fun array_shrink (a:'a ArrayType) (sz:Int.int) = shrink (a,Int.toInt sz);
 
-fun array_get_oo (d:'a) (a:'a ArrayType) (i:IntInf.int) =
-  sub (a,IntInf.toInt i) handle Subscript => d
+fun array_get_oo (d:'a) (a:'a ArrayType) (i:Int.int) =
+  sub (a,Int.toInt i) handle Subscript => d
 
-fun array_set_oo (d:(unit->'a ArrayType)) (a:'a ArrayType) (i:IntInf.int) (e:'a) =
-  update (a, IntInf.toInt i, e) handle Subscript => d ()
+fun array_set_oo (d:(unit->'a ArrayType)) (a:'a ArrayType) (i:Int.int) (e:'a) =
+  update (a, Int.toInt i, e) handle Subscript => d ()
 
 end;
 end;
@@ -296,7 +296,7 @@ end
 fun imp_for_inner i u c f s =
   let
     fun imp_for1 i u f s =
-      if IntInf.<= (u, i) then (fn () => s)
+      if Int.<= (u, i) then (fn () => s)
       else if c s () then imp_for1 (i + 1) u f (f i s ())
       else (fn () => s)
   in imp_for1 i u f s end;
@@ -304,7 +304,7 @@ fun imp_for_inner i u c f s =
 fun imp_fora_inner i u f s =
   let
     fun imp_for1 i u f s =
-      if IntInf.<= (u, i) then (fn () => s)
+      if Int.<= (u, i) then (fn () => s)
       else imp_for1 (i + 1) u f (f i s ())
   in imp_for1 i u f s end;
 
@@ -313,13 +313,13 @@ fun imp_fora_inner i u f s =
    fun array_blit src si dst di len = (
       src=dst andalso raise Fail ("array_blit: Same arrays");
       ArraySlice.copy {
-        di = IntInf.toInt di,
-        src = ArraySlice.slice (src,IntInf.toInt si,SOME (IntInf.toInt len)),
+        di = Int.toInt di,
+        src = ArraySlice.slice (src,Int.toInt si,SOME (Int.toInt len)),
         dst = dst})
 
-    fun array_nth_oo v a i () = Array.sub(a,IntInf.toInt i) handle Subscript => v | Overflow => v
+    fun array_nth_oo v a i () = Array.sub(a,Int.toInt i) handle Subscript => v | Overflow => v
     fun array_upd_oo f i x a () = 
-      (Array.update(a,IntInf.toInt i,x); a) handle Subscript => f () | Overflow => f ()
+      (Array.update(a,Int.toInt i,x); a) handle Subscript => f () | Overflow => f ()
 
 
 
@@ -333,14 +333,14 @@ struct
 fun map f [] = []
   | map f (x :: xs) = f x :: map f xs; (* deliberate clone not relying on List._ module *)
 
-fun check_ascii (k : IntInf.int) =
+fun check_ascii (k : Int.int) =
   if 0 <= k andalso k < 128
   then k
   else raise Fail "Non-ASCII character in literal";
 
-val char_of_ascii = Char.chr o IntInf.toInt o check_ascii;
+val char_of_ascii = Char.chr o Int.toInt o check_ascii;
 
-val ascii_of_char = check_ascii o IntInf.fromInt o Char.ord;
+val ascii_of_char = check_ascii o Int.fromInt o Char.ord;
 
 val literal_of_asciis = String.implode o map char_of_ascii;
 
@@ -424,32 +424,32 @@ val heap_int = {countable_heap = countable_int, typerep_heap = typerep_int} :
 
 fun uminus_inta k = Int_of_integer (~ (integer_of_int k));
 
-val zero_inta : inta = Int_of_integer (0 : IntInf.int);
+val zero_inta : inta = Int_of_integer (0 : Int.int);
 
 fun apsnd f (x, y) = (x, f y);
 
 datatype num = One | Bit0 of num | Bit1 of num;
 
 fun divmod_integer k l =
-  (if k = (0 : IntInf.int) then ((0 : IntInf.int), (0 : IntInf.int))
-    else (if (0 : IntInf.int) < l
-           then (if (0 : IntInf.int) < k then Integer.div_mod (abs k) (abs l)
+  (if k = (0 : Int.int) then ((0 : Int.int), (0 : Int.int))
+    else (if (0 : Int.int) < l
+           then (if (0 : Int.int) < k then Integer.div_mod (abs k) (abs l)
                   else let
                          val (r, s) = Integer.div_mod (abs k) (abs l);
                        in
-                         (if s = (0 : IntInf.int) then (~ r, (0 : IntInf.int))
-                           else (~ r - (1 : IntInf.int), l - s))
+                         (if s = (0 : Int.int) then (~ r, (0 : Int.int))
+                           else (~ r - (1 : Int.int), l - s))
                        end)
-           else (if l = (0 : IntInf.int) then ((0 : IntInf.int), k)
+           else (if l = (0 : Int.int) then ((0 : Int.int), k)
                   else apsnd (fn a => ~ a)
-                         (if k < (0 : IntInf.int)
+                         (if k < (0 : Int.int)
                            then Integer.div_mod (abs k) (abs l)
                            else let
                                   val (r, s) = Integer.div_mod (abs k) (abs l);
                                 in
-                                  (if s = (0 : IntInf.int)
-                                    then (~ r, (0 : IntInf.int))
-                                    else (~ r - (1 : IntInf.int), ~ l - s))
+                                  (if s = (0 : Int.int)
+                                    then (~ r, (0 : Int.int))
+                                    else (~ r - (1 : Int.int), ~ l - s))
                                 end))));
 
 fun snd (x1, x2) = x2;
@@ -480,11 +480,11 @@ val ord_integer =
   {less_eq = (fn a => fn b => a <= b), less = (fn a => fn b => a < b)} :
   int ord;
 
-fun nat_of_integer k = Nat (max ord_integer (0 : IntInf.int) k);
+fun nat_of_integer k = Nat (max ord_integer (0 : Int.int) k);
 
-val zero_nata : nat = Nat (0 : IntInf.int);
+val zero_nata : nat = Nat (0 : Int.int);
 
-val one_nata : nat = Nat (1 : IntInf.int);
+val one_nata : nat = Nat (1 : Int.int);
 
 datatype char = Chara of bool * bool * bool * bool * bool * bool * bool * bool;
 
@@ -493,25 +493,25 @@ fun string_of_digit n =
     then [Chara (false, false, false, false, true, true, false, false)]
     else (if equal_nata n one_nata
            then [Chara (true, false, false, false, true, true, false, false)]
-           else (if equal_nata n (nat_of_integer (2 : IntInf.int))
+           else (if equal_nata n (nat_of_integer (2 : Int.int))
                   then [Chara (false, true, false, false, true, true, false,
                                 false)]
-                  else (if equal_nata n (nat_of_integer (3 : IntInf.int))
+                  else (if equal_nata n (nat_of_integer (3 : Int.int))
                          then [Chara (true, true, false, false, true, true,
                                        false, false)]
-                         else (if equal_nata n (nat_of_integer (4 : IntInf.int))
+                         else (if equal_nata n (nat_of_integer (4 : Int.int))
                                 then [Chara
 (false, false, true, false, true, true, false, false)]
                                 else (if equal_nata n
-   (nat_of_integer (5 : IntInf.int))
+   (nat_of_integer (5 : Int.int))
                                        then [Chara
        (true, false, true, false, true, true, false, false)]
                                        else (if equal_nata n
-          (nat_of_integer (6 : IntInf.int))
+          (nat_of_integer (6 : Int.int))
       then [Chara (false, true, true, false, true, true, false, false)]
-      else (if equal_nata n (nat_of_integer (7 : IntInf.int))
+      else (if equal_nata n (nat_of_integer (7 : Int.int))
              then [Chara (true, true, true, false, true, true, false, false)]
-             else (if equal_nata n (nat_of_integer (8 : IntInf.int))
+             else (if equal_nata n (nat_of_integer (8 : Int.int))
                     then [Chara (false, false, false, true, true, true, false,
                                   false)]
                     else [Chara (true, false, false, true, true, true, false,
@@ -522,16 +522,16 @@ fun less_nat m n = integer_of_nat m < integer_of_nat n;
 fun shows_string x = (fn a => x @ a);
 
 fun showsp_nat p n =
-  (if less_nat n (nat_of_integer (10 : IntInf.int))
+  (if less_nat n (nat_of_integer (10 : Int.int))
     then shows_string (string_of_digit n)
-    else showsp_nat p (divide_nat n (nat_of_integer (10 : IntInf.int))) o
+    else showsp_nat p (divide_nat n (nat_of_integer (10 : Int.int))) o
            shows_string
              (string_of_digit
-               (modulo_nat n (nat_of_integer (10 : IntInf.int)))));
+               (modulo_nat n (nat_of_integer (10 : Int.int)))));
 
 fun less_int k l = integer_of_int k < integer_of_int l;
 
-fun nat k = Nat (max ord_integer (0 : IntInf.int) (integer_of_int k));
+fun nat k = Nat (max ord_integer (0 : Int.int) (integer_of_int k));
 
 fun showsp_int p i =
   (if less_int i zero_inta
@@ -653,14 +653,14 @@ val group_add_int =
     uminus_group_add = uminus_int}
   : inta group_add;
 
-fun def_hashmap_size_int x = (fn _ => nat_of_integer (16 : IntInf.int)) x;
+fun def_hashmap_size_int x = (fn _ => nat_of_integer (16 : Int.int)) x;
 
 type 'a hashable =
   {hashcode : 'a -> Word32.word, def_hashmap_size : 'a itself -> nat};
 val hashcode = #hashcode : 'a hashable -> 'a -> Word32.word;
 val def_hashmap_size = #def_hashmap_size : 'a hashable -> 'a itself -> nat;
 
-fun uint32_of_int i = Word32.fromLargeInt (IntInf.toLarge (integer_of_int i));
+fun uint32_of_int i = Word32.fromLargeInt (Int.toLarge (integer_of_int i));
 
 fun hashcode_int i = uint32_of_int i;
 
@@ -1034,7 +1034,7 @@ val monoid_add_nat =
   {semigroup_add_monoid_add = semigroup_add_nat, zero_monoid_add = zero_nat} :
   nat monoid_add;
 
-fun def_hashmap_size_nat x = (fn _ => nat_of_integer (16 : IntInf.int)) x;
+fun def_hashmap_size_nat x = (fn _ => nat_of_integer (16 : Int.int)) x;
 
 fun int_of_nat n = Int_of_integer (integer_of_nat n);
 
@@ -1087,16 +1087,16 @@ fun times_nat m n = Nat (integer_of_nat m * integer_of_nat n);
 
 fun def_hashmap_size_list A_ =
   (fn _ =>
-    times_nat (nat_of_integer (2 : IntInf.int)) (def_hashmap_size A_ Type));
+    times_nat (nat_of_integer (2 : Int.int)) (def_hashmap_size A_ Type));
 
 fun foldl f a [] = a
   | foldl f a (x :: xs) = foldl f (f a x) xs;
 
 fun hashcode_list A_ =
   foldl (fn h => fn x =>
-          Word32.+ (Word32.* (h, Word32.fromLargeInt (IntInf.toLarge (33 : IntInf.int))), hashcode
+          Word32.+ (Word32.* (h, Word32.fromLargeInt (Int.toLarge (33 : Int.int))), hashcode
             A_ x))
-    (Word32.fromLargeInt (IntInf.toLarge (5381 : IntInf.int)));
+    (Word32.fromLargeInt (Int.toLarge (5381 : Int.int)));
 
 fun hashable_list A_ =
   {hashcode = hashcode_list A_, def_hashmap_size = def_hashmap_size_list A_} :
@@ -1382,11 +1382,11 @@ val equal_literal = {equal = (fn a => fn b => ((a : string) = b))} :
   string equal;
 
 fun bit_cut_integer k =
-  (if k = (0 : IntInf.int) then ((0 : IntInf.int), false)
+  (if k = (0 : Int.int) then ((0 : Int.int), false)
     else let
-           val (r, s) = Integer.div_mod (abs k) (abs (2 : IntInf.int));
+           val (r, s) = Integer.div_mod (abs k) (abs (2 : Int.int));
          in
-           ((if (0 : IntInf.int) < k then r else ~ r - s), s = (1 : IntInf.int))
+           ((if (0 : Int.int) < k then r else ~ r - s), s = (1 : Int.int))
          end);
 
 fun char_of_integer k = let
@@ -1458,7 +1458,7 @@ fun def_hashmap_size_prod A_ B_ =
 
 fun hashcode_prod A_ B_ x =
   Word32.+ (Word32.* (hashcode A_
-                        (fst x), Word32.fromLargeInt (IntInf.toLarge (33 : IntInf.int))), hashcode
+                        (fst x), Word32.fromLargeInt (Int.toLarge (33 : Int.int))), hashcode
             B_ (snd x));
 
 fun hashable_prod A_ B_ =
@@ -1466,11 +1466,11 @@ fun hashable_prod A_ B_ =
     def_hashmap_size = def_hashmap_size_prod A_ B_}
   : ('a * 'b) hashable;
 
-val one_integera : int = (1 : IntInf.int);
+val one_integera : int = (1 : Int.int);
 
 val one_integer = {one = one_integera} : int one;
 
-val zero_integer = {zero = (0 : IntInf.int)} : int zero;
+val zero_integer = {zero = (0 : Int.int)} : int zero;
 
 type 'a zero_neq_one = {one_zero_neq_one : 'a one, zero_zero_neq_one : 'a zero};
 val one_zero_neq_one = #one_zero_neq_one : 'a zero_neq_one -> 'a one;
@@ -1738,7 +1738,7 @@ fun list_ex p [] = false
 fun bex (Set xs) p = list_ex p xs;
 
 fun minus_nat m n =
-  Nat (max ord_integer (0 : IntInf.int) (integer_of_nat m - integer_of_nat n));
+  Nat (max ord_integer (0 : Int.int) (integer_of_nat m - integer_of_nat n));
 
 fun nth (x :: xs) n =
   (if equal_nata n zero_nata then x else nth xs (minus_nat n one_nata));
@@ -1760,17 +1760,17 @@ fun list_all p [] = true
 fun ball (Set xs) p = list_all p xs;
 
 fun len A_ a =
-  (fn f_ => fn () => f_ (((fn () => IntInf.fromInt (Array.length a))) ()) ())
+  (fn f_ => fn () => f_ (((fn () => Int.fromInt (Array.length a))) ()) ())
     (fn i => (fn () => (nat_of_integer i)));
 
 fun new A_ =
-  (fn a => fn b => (fn () => Array.array (IntInf.toInt a, b))) o integer_of_nat;
+  (fn a => fn b => (fn () => Array.array (Int.toInt a, b))) o integer_of_nat;
 
-fun ntha A_ a n = (fn () => Array.sub (a, IntInf.toInt (integer_of_nat n)));
+fun ntha A_ a n = (fn () => Array.sub (a, Int.toInt (integer_of_nat n)));
 
 fun upd A_ i x a =
   (fn f_ => fn () => f_
-    (((fn () => Array.update (a, IntInf.toInt (integer_of_nat i), x))) ()) ())
+    (((fn () => Array.update (a, Int.toInt (integer_of_nat i), x))) ()) ())
     (fn _ => (fn () => a));
 
 fun drop n [] = []
@@ -1789,15 +1789,15 @@ fun take n [] = []
 fun image f (Set xs) = Set (map f xs);
 
 fun make A_ n f =
-  (fn () => Array.tabulate (IntInf.toInt (integer_of_nat n),
-    (f o nat_of_integer) o IntInf.fromInt));
+  (fn () => Array.tabulate (Int.toInt (integer_of_nat n),
+    (f o nat_of_integer) o Int.fromInt));
 
 fun inj_on A_ B_ f a =
   ball a
     (fn x => ball a (fn y => (if eq B_ (f x) (f y) then eq A_ x y else true)));
 
 fun sub asa n =
-  (Vector.sub o (fn (a, b) => (a, IntInf.toInt b))) (asa, integer_of_nat n);
+  (Vector.sub o (fn (a, b) => (a, Int.toInt b))) (asa, integer_of_nat n);
 
 fun map_of A_ ((l, v) :: ps) k = (if eq A_ l k then SOME v else map_of A_ ps k)
   | map_of A_ [] k = NONE;
@@ -2031,7 +2031,7 @@ fun err_expecting_aux A_ msg =
                 Chara (false, false, false, false, false, true, false, false)] o
             shows_quote
               (shows_prec_list A_ zero_nata
-                (take (nat_of_integer (100 : IntInf.int)) ts))));
+                (take (nat_of_integer (100 : Int.int)) ts))));
 
 fun get ll =
   let
@@ -2184,19 +2184,19 @@ fun of_bool A_ true = one (one_zero_neq_one A_)
   | of_bool A_ false = zero (zero_zero_neq_one A_);
 
 fun integer_of_char (Chara (b0, b1, b2, b3, b4, b5, b6, b7)) =
-  ((((((of_bool zero_neq_one_integer b7 * (2 : IntInf.int) +
+  ((((((of_bool zero_neq_one_integer b7 * (2 : Int.int) +
          of_bool zero_neq_one_integer b6) *
-         (2 : IntInf.int) +
+         (2 : Int.int) +
         of_bool zero_neq_one_integer b5) *
-        (2 : IntInf.int) +
+        (2 : Int.int) +
        of_bool zero_neq_one_integer b4) *
-       (2 : IntInf.int) +
+       (2 : Int.int) +
       of_bool zero_neq_one_integer b3) *
-      (2 : IntInf.int) +
+      (2 : Int.int) +
      of_bool zero_neq_one_integer b2) *
-     (2 : IntInf.int) +
+     (2 : Int.int) +
     of_bool zero_neq_one_integer b1) *
-    (2 : IntInf.int) +
+    (2 : Int.int) +
     of_bool zero_neq_one_integer b0;
 
 fun nat_of_char c = Nat (integer_of_char c);
@@ -2249,7 +2249,7 @@ fun lx_nat_aux acc l =
   bindb (alt (bindb lx_digit
                (fn x =>
                  lx_nat_aux
-                   (plus_nata (times_nat (nat_of_integer (10 : IntInf.int)) acc)
+                   (plus_nata (times_nat (nat_of_integer (10 : Int.int)) acc)
                      (minus_nat (nat_of_char x)
                        (nat_of_char
                          (Chara
@@ -2497,7 +2497,7 @@ fun json_string x =
 
 fun nats_to_nat x [] = x
   | nats_to_nat x (n :: ns) =
-    nats_to_nat (plus_nata (times_nat (nat_of_integer (10 : IntInf.int)) x) n)
+    nats_to_nat (plus_nata (times_nat (nat_of_integer (10 : Int.int)) x) n)
       ns;
 
 fun lx_rat x =
@@ -2626,7 +2626,7 @@ fun ht_new_sz (A1_, A2_) B_ n =
 fun ht_new (A1_, A2_) B_ = ht_new_sz (A1_, A2_) B_ (def_hashmap_size A1_ Type);
 
 fun nat_of_uint32 x =
-  nat_of_integer (IntInf.fromLarge (Word32.toLargeInt x) : IntInf.int);
+  nat_of_integer (Int.fromLarge (Word32.toLargeInt x) : Int.int);
 
 fun nat_of_hashcode x = nat_of_uint32 x;
 
@@ -2761,11 +2761,11 @@ fun ht_rehash (A1_, A2_, A3_) B_ ht =
     (fn n =>
       (fn f_ => fn () => f_
         ((ht_new_sz (A2_, A3_) B_
-           (times_nat (nat_of_integer (2 : IntInf.int)) n))
+           (times_nat (nat_of_integer (2 : Int.int)) n))
         ()) ())
         (ht_copy (A1_, A2_, A3_) B_ n ht));
 
-val load_factor : nat = nat_of_integer (75 : IntInf.int);
+val load_factor : nat = nat_of_integer (75 : Int.int);
 
 fun ht_update (A1_, A2_, A3_) B_ k v ht =
   (fn f_ => fn () => f_ ((len (heap_list (heap_prod A3_ B_)) (the_array ht)) ())
@@ -2773,7 +2773,7 @@ fun ht_update (A1_, A2_, A3_) B_ k v ht =
     (fn m =>
       (fn f_ => fn () => f_
         ((if less_eq_nat (times_nat m load_factor)
-               (times_nat (the_size ht) (nat_of_integer (100 : IntInf.int)))
+               (times_nat (the_size ht) (nat_of_integer (100 : Int.int)))
            then ht_rehash (A1_, A2_, A3_) B_ ht else (fn () => ht))
         ()) ())
         (ht_upd (A1_, A2_, A3_) B_ k v));
@@ -2888,9 +2888,9 @@ fun as_shrink s =
   let
     val (a, n) = s;
     val aa =
-      (if less_eq_nat (times_nat (nat_of_integer (128 : IntInf.int)) n)
+      (if less_eq_nat (times_nat (nat_of_integer (128 : Int.int)) n)
             (array_length a) andalso
-            less_nat (nat_of_integer (4 : IntInf.int)) n
+            less_nat (nat_of_integer (4 : Int.int)) n
         then array_shrink a n else a);
   in
     (aa, n)
@@ -2934,7 +2934,7 @@ fun min A_ a b = (if less_eq A_ a b then a else b);
 fun imp_for_int_innera i u f s =
   (if u <= i then (fn () => s)
     else (fn f_ => fn () => f_ ((f i s) ()) ())
-           (imp_for_int_innera (i + (1 : IntInf.int)) u f));
+           (imp_for_int_innera (i + (1 : Int.int)) u f));
 
 fun imp_for_inta i u f s =
   imp_for_int_innera (integer_of_nat i) (integer_of_nat u) (f o nat_of_integer)
@@ -3004,8 +3004,8 @@ fun as_push s x =
     val aa =
       (if equal_nata n (array_length a)
         then array_grow a
-               (max ord_nat (nat_of_integer (4 : IntInf.int))
-                 (times_nat (nat_of_integer (2 : IntInf.int)) n))
+               (max ord_nat (nat_of_integer (4 : Int.int))
+                 (times_nat (nat_of_integer (2 : Int.int)) n))
                x
         else a);
     val ab = array_set aa n x;
@@ -3022,7 +3022,7 @@ fun as_take m s = let
 fun rev_append [] ac = ac
   | rev_append (x :: xs) ac = rev_append xs (x :: ac);
 
-val one_int : inta = Int_of_integer (1 : IntInf.int);
+val one_int : inta = Int_of_integer (1 : Int.int);
 
 fun map_option f NONE = NONE
   | map_option f (SOME x2) = SOME (f x2);
@@ -3118,15 +3118,15 @@ fun ahm_rehash_aux bhc a sz =
 
 fun ahm_rehash bhc (HashMap (a, n)) sz = HashMap (ahm_rehash_aux bhc a sz, n);
 
-val load_factora : nat = nat_of_integer (75 : IntInf.int);
+val load_factora : nat = nat_of_integer (75 : Int.int);
 
 fun ahm_filled (HashMap (a, n)) =
   less_eq_nat (times_nat (array_length a) load_factora)
-    (times_nat n (nat_of_integer (100 : IntInf.int)));
+    (times_nat n (nat_of_integer (100 : Int.int)));
 
 fun hm_grow (HashMap (a, n)) =
-  plus_nata (times_nat (nat_of_integer (2 : IntInf.int)) (array_length a))
-    (nat_of_integer (3 : IntInf.int));
+  plus_nata (times_nat (nat_of_integer (2 : Int.int)) (array_length a))
+    (nat_of_integer (3 : Int.int));
 
 fun ahm_update eq bhc k v hm =
   let
@@ -3292,23 +3292,23 @@ fun dbm_add_int INF uu = INF
 
 fun fw_upd_impl_integer n a k i j =
   let
-    val na = n + (1 : IntInf.int);
+    val na = n + (1 : Int.int);
     val ia = i * na + j;
   in
-    (fn f_ => fn () => f_ (((fn () => Array.sub (a, IntInf.toInt (i * na + k))))
+    (fn f_ => fn () => f_ (((fn () => Array.sub (a, Int.toInt (i * na + k))))
       ()) ())
       (fn y =>
         (fn f_ => fn () => f_
-          (((fn () => Array.sub (a, IntInf.toInt (k * na + j)))) ()) ())
+          (((fn () => Array.sub (a, Int.toInt (k * na + j)))) ()) ())
           (fn z =>
-            (fn f_ => fn () => f_ (((fn () => Array.sub (a, IntInf.toInt ia)))
+            (fn f_ => fn () => f_ (((fn () => Array.sub (a, Int.toInt ia)))
               ()) ())
               (fn x =>
                 let
                   val m = dbm_add_int y z;
                 in
                   (if dbm_lt_int m x
-                    then (fn a => fn () => (Array.update (a, IntInf.toInt ia, m); a)) a
+                    then (fn a => fn () => (Array.update (a, Int.toInt ia, m); a)) a
                     else (fn () => a))
                 end)))
   end;
@@ -3316,11 +3316,11 @@ fun fw_upd_impl_integer n a k i j =
 fun fwi_impl_int n a k =
   let
     val na = integer_of_nat n;
-    val n_plus_1 = na + (1 : IntInf.int);
+    val n_plus_1 = na + (1 : Int.int);
   in
-    imp_for_int_innera (0 : IntInf.int) n_plus_1
+    imp_for_int_innera (0 : Int.int) n_plus_1
       (fn i =>
-        imp_for_int_innera (0 : IntInf.int) n_plus_1
+        imp_for_int_innera (0 : Int.int) n_plus_1
           (fn ia => fn xa => fw_upd_impl_integer na xa (integer_of_nat k) i ia))
       a
   end;
@@ -3379,7 +3379,7 @@ fun sort_key B_ f xs =
         val (lts, (eqs, gts)) =
           part B_ f
             (f (nth xs
-                 (divide_nat (size_list xs) (nat_of_integer (2 : IntInf.int)))))
+                 (divide_nat (size_list xs) (nat_of_integer (2 : Int.int)))))
             xs;
       in
         sort_key B_ f lts @ eqs @ sort_key B_ f gts
@@ -3665,7 +3665,7 @@ fun imp_for_int_inner i u c f s =
            (fn ctn =>
              (if ctn
                then (fn f_ => fn () => f_ ((f i s) ()) ())
-                      (imp_for_int_inner (i + (1 : IntInf.int)) u c f)
+                      (imp_for_int_inner (i + (1 : Int.int)) u c f)
                else (fn () => s))));
 
 fun imp_for_int i u c f s =
@@ -5380,7 +5380,7 @@ fun convert json =
                     let
                       val _ =
                         (fn _ => fn s => writeln (s ())) (Int_of_integer
-                   (3 : IntInf.int)) ((fn _ =>
+                   (3 : Int.int)) ((fn _ =>
 (fn () =>
   ("Broadcast channels " ^
     implode (shows_prec_list show_literal zero_nata broadcasta [])))) ());
@@ -6915,11 +6915,11 @@ fun do_rename_mc C_ E_ F_ G_ f dc broadcast bounds automata k urge l_0 s_0
         renum_clocks renum_states;
     val _ =
       (fn _ => fn s => writeln (s ())) (Int_of_integer
- (4 : IntInf.int)) ((fn _ => (fn () => "Automata after renaming")) ());
+ (4 : Int.int)) ((fn _ => (fn () => "Automata after renaming")) ());
     val _ =
       map (fn a =>
             (fn _ => fn s => writeln (s ())) (Int_of_integer
-       (4 : IntInf.int)) ((fn _ =>
+       (4 : Int.int)) ((fn _ =>
                             (fn () =>
                               (implode
                                 (shows_prec_prod (show_list show_nat)
@@ -7192,7 +7192,7 @@ fun check_prop_fail_impl (A1_, A2_, A3_) B_ pi copyi show_dbm_impl show_loc_impl
 fun print_sep x =
   (fn () =>
     writeln (implode
-              (replicate (nat_of_integer (100 : IntInf.int))
+              (replicate (nat_of_integer (100 : Int.int))
                 (Chara (true, false, true, true, false, true, false, false)))))
     x;
 
@@ -7648,7 +7648,7 @@ Chara (true, true, false, false, true, true, true, false)])
               ("Process renamings do not agree on " ^ implode name))
         (fn _ =>
           let
-            val max_id = nat_of_integer (1000 : IntInf.int);
+            val max_id = nat_of_integer (1000 : Int.int);
           in
             binda (nat_renaming_of_json ("process" ^ show_str show_nat p_num)
                     max_id renaming)

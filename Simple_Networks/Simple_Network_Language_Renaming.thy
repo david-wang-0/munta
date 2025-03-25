@@ -2569,7 +2569,7 @@ begin
 
 definition \<Phi>' where
   "\<Phi>' = map_formula renum_states renum_vars id \<Phi>"
-
+(* Important *)
 lemma models_iff:
   "sem,a\<^sub>0 \<Turnstile> \<Phi> = renum.sem,a\<^sub>0' \<Turnstile> \<Phi>'" if "locs_of_formula \<Phi> \<subseteq> {0..<n_ps}"
 proof -
@@ -2889,15 +2889,20 @@ sublocale rename: Simple_Network_Rename_int
   "extend_bij renum_clocks (insert urge clk_set')"
   "\<lambda>p. extend_bij (renum_states p) loc_set"
   "map (conv_urge urge) automata"
-  apply (standard;
-      (intro allI impI bij_extend_bij_renum_clocks inj_extend_bij_renum_states
-        inj_extend_bij_renum_acts bij_extend_bij_renum_states bounds'_var_set)?)
-    apply (simp add: Prod_TA_Defs.n_ps_def; fail)
-  subgoal
-    unfolding bounds'_var_set rename.var_set_compute var_set_compute unfolding conv_urge_def
-    by (fo_rule arg_cong2; fastforce)
+  apply standard
+       apply (rule bij_extend_bij_renum_clocks)
+  apply (rule allI, rule impI)
+      apply (rule inj_extend_bij_renum_states)
+  unfolding n_ps_def Prod_TA_Defs.n_ps_def apply simp
+     apply (rule bij_extend_bij_renum_states)
+    defer apply (rule inj_extend_bij_renum_acts)
   subgoal
     unfolding conv_urge_def by auto
+  subgoal
+    unfolding bounds'_var_set rename.var_set_compute var_set_compute 
+    unfolding conv_urge_def
+    apply (fo_rule arg_cong2)
+    by (fastforce)+
   done
 
 definition
@@ -3278,7 +3283,7 @@ lemmas models_state_compatible =
 lemmas models_state_compatible' = models_state_compatible[unfolded rename_N_eq_sem, folded N_eq_sem]
 
 end
-
+(* Renaming the formula, start, and automata? *)
 locale Simple_Network_Rename_Formula =
   Simple_Network_Rename_Start where automata = automata
   for automata ::
@@ -3291,7 +3296,7 @@ locale Simple_Network_Rename_Formula =
     "locs_of_formula \<Phi> \<subseteq> {0..<n_ps}"
     "vars_of_formula \<Phi> \<subseteq> var_set"
 begin
-
+                                          
 sublocale rename: Simple_Network_Rename_Formula_int
   broadcast bounds'
   "extend_bij renum_acts act_set"
@@ -3317,7 +3322,10 @@ lemma models_iff1:
 
 lemma models_iff2:
   "rename.sem,a\<^sub>0 \<Turnstile> \<Phi> \<longleftrightarrow> sem,a\<^sub>0 \<Turnstile> \<Phi>"
-  by (rule sym, intro urge_models_iff formula_dom) (auto intro: formula_dom L\<^sub>0_states simp: a\<^sub>0_def)
+  apply (rule sym)
+  apply (intro urge_models_iff)
+  unfolding a\<^sub>0_def apply auto
+  using L\<^sub>0_states .
 
 lemma models_iff:
   "rename.renum.sem,a\<^sub>0' \<Turnstile> \<Phi>' \<longleftrightarrow> sem,a\<^sub>0 \<Turnstile> \<Phi>"

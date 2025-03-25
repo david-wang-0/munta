@@ -285,7 +285,7 @@ ML \<open>
   fun do_test dc file =
   let
     val s = file_to_string file;
-  in
+  in                        
     @{code parse_convert_run_print} dc s end
 \<close>
 (* 
