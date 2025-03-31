@@ -886,15 +886,17 @@ do {
   in (f, f_inv)
   )
 }"
-
 definition
   "extend_domain m d n \<equiv>
     let
-      (i, xs) = fold
-        (\<lambda>x (i, xs). if x \<in> set d then (i + 1, (x, i + 1) # xs) else (i, xs)) d (n, []);
+      (i, xs) = fold (\<lambda>x (i, xs). if x \<in> set d then (i + 1, (x, i + 1) # xs) else (i, xs)) d (n, []);
       m' = map_of xs
     in
       (\<lambda>x. if x \<in> set d then the (m' x) else m x)"
+
+definition "test_fun \<equiv> the o (map_of [(0::nat, 0::int), (1::nat, 1)])"
+
+value "extend_domain test_fun [2, 3, 4] 1"
 
 (* Unused *)
 lemma [simp]:
